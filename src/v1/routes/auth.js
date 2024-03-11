@@ -16,7 +16,7 @@ router.post(
     .withMessage("パスワードは4文字以上である必要があります"),
   body("username").custom((value) => {
     return User.findOne({ username: value }).then((user) => {
-      if (User) {
+      if (user) {
         return Promise.reject("このユーザ名は既に使用されています");
       }
     });

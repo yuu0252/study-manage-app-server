@@ -27,7 +27,7 @@ exports.login = async (req, res) => {
 
   try {
     // ユーザがデータベースに存在するかチェック
-    const user = await user.findOne({ username: username });
+    const user = await User.findOne({ username: username });
     if (!user) {
       return res.status(401).json({
         errors: [
@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECTRET_KEY, {
+    const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY, {
       expiresIn: "24h",
     });
     return res.status(201).json({ user, token });
