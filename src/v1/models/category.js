@@ -9,7 +9,8 @@ const categorySchema = new Schema({
   },
   title: {
     type: String,
-    default: "未分類",
+    unique: true,
+    required: true,
   },
 });
 
