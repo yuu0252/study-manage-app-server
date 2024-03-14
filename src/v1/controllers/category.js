@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const Memo = require("../models/memo");
 
 exports.create = async (req, res) => {
   try {
@@ -115,6 +116,9 @@ exports.delete = async (req, res) => {
       user: req.user._id,
       _id: categoryId,
     });
+
+    // 削除したカテゴリのメモを削除
+    await Memo.deleteMany({ category: categoryId });
 
     res.status(200).json(`${category.title}を削除しました`);
   } catch (err) {

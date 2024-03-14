@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const category = require("./category");
 const Schema = mongoose.Schema;
 
 const memoSchema = new Schema({
@@ -11,6 +12,7 @@ const memoSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "category",
     required: true,
+    onDelete: "cascade",
   },
   title: {
     type: String,
