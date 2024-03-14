@@ -40,6 +40,11 @@ exports.getAll = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     const { categoryId } = req.params;
+
+    if (!/^[0-9a-fA-F]{24}$/.test(categoryId)) {
+      return res.status(400).json("カテゴリIDが無効です");
+    }
+
     const category = await Category.findOne({
       user: req.user._id,
       _id: categoryId,
@@ -56,6 +61,11 @@ exports.getOne = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { categoryId } = req.params;
+
+    if (!/^[0-9a-fA-F]{24}$/.test(categoryId)) {
+      return res.status(400).json("カテゴリIDが無効です");
+    }
+
     let { title } = req.body;
     if (title == "" || !title) {
       title = "カテゴリなし";
@@ -89,6 +99,11 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const { categoryId } = req.params;
+
+    if (!/^[0-9a-fA-F]{24}$/.test(categoryId)) {
+      return res.status(400).json("カテゴリIDが無効です");
+    }
+
     const category = await Category.findOne({
       user: req.user._id,
       _id: categoryId,
