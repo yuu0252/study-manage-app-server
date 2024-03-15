@@ -2,7 +2,7 @@ const router = require("express").Router();
 const tokenHandler = require("../middlewares/tokenHandler");
 const categoryController = require("../controllers/category");
 
-router.post("/create", tokenHandler.verifyToken, categoryController.create);
+router.post("/", tokenHandler.verifyToken, categoryController.create);
 
 router.get("/", tokenHandler.verifyToken, categoryController.getAll);
 
