@@ -6,6 +6,7 @@ const router = require("express").Router();
 router.use("/auth", require("./auth"));
 router.use("/categories", require("./category"));
 router.use("/categories", require("./memo"));
+router.use("/openai", require("./openAi"));
 
 router.get("/allmemos", tokenHandler.verifyToken, memoController.getUserMemos);
 

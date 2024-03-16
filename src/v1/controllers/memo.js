@@ -69,7 +69,7 @@ exports.getOne = async (req, res) => {
       return res.status(400).json("メモIDが無効です");
     }
 
-    const memo = await Memo.find({
+    const memo = await Memo.findOne({
       user: userId,
       category: categoryId,
       _id: memoId,
