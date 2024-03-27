@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
     const user = await User.create(req.body);
     // JWT発行
     const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY, {
-      expiresIn: "24h",
+      expiresIn: 2592000,
     });
     return res.status(200).json({ user, token });
   } catch (err) {
@@ -23,9 +23,8 @@ exports.register = async (req, res) => {
 
 // ログイン
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
-
   try {
+    const { username, password } = req.body;
     // ユーザがデータベースに存在するかチェック
     const user = await User.findOne({ username: username });
     if (!user) {
@@ -57,7 +56,7 @@ exports.login = async (req, res) => {
     }
 
     const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY, {
-      expiresIn: "24h",
+      expiresIn: 2592000,
     });
     return res.status(201).json({ user, token });
   } catch (err) {
